@@ -1,0 +1,78 @@
+$count: 11;
+
+.loading-page {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  backdrop-filter: saturate(10%) blur(5px);
+  background: hsla(0, 0%, 100%, 0.8);
+}
+
+.g-container {
+  position: relative;
+//   margin: 20rem auto;
+  width: 33rem;
+  height: 10rem;
+  filter: blur(0.2rem) contrast(8);
+}
+
+.g-view {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0deg) scale(1);
+  position: absolute;
+  overflow: hidden;
+  font-size: 6rem;
+  height: 10rem;
+}
+
+.g-text {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 33rem;
+  text-align: center;
+}
+
+@for $i from 0 to $count {
+  .g-view:nth-child(#{$i}) {
+    width: #{$i * 3}rem;
+    animation: rotate 1.5s ease-in #{$i * 140}ms;
+    animation-direction: alternate;
+    z-index: 10 - $i;
+
+    &::before {
+      $j: $i - 1;
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: #{$j * 3}rem;
+      height: 10rem;
+      background: #fff;
+      z-index: 1;
+    }
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) scaleX(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) scaleX(0.1);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) scaleX(1);
+  }
+}
