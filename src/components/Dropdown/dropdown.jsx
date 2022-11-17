@@ -19,7 +19,8 @@ const Dropdown = ({ user }) => {
             "justify-center",
             "overflow-hidden",
             "rounded-full",
-            "bg-slate-100"
+            "bg-slate-100",
+            "cursor-pointer"
           )}
         >
           <Avatar.Image

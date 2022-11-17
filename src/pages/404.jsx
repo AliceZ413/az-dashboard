@@ -17,4 +17,6 @@ const NotFoundPage = () => {
   );
 };
 
+NotFoundPage.Layout = "root";
+
 export default NotFoundPage;

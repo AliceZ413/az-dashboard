@@ -7,21 +7,26 @@ const Header = ({ user }) => {
   return (
     <header
       className={clsx(
-        "h-[60px]",
+        "h-[64px]",
         "flex",
         "justify-between",
         "items-center",
-        "rounded-lg",
-        "shadow",
-        "px-8"
+        "px-8",
+        "bg-[#4e49dc]"
       )}
     >
       <Link
         href={"/"}
-        className={clsx("w-[200px]", "h-[60px]", "flex", "items-center")}
+        className={clsx(
+          "w-[150px]",
+          "h-[64px]",
+          "flex",
+          "items-center",
+          "text-white"
+        )}
       >
-        <LogoDevRounded />
-        <span className={clsx("text-lg", "font-bold")}>Admin</span>
+        <LogoDevRounded className={clsx("text-[36px]")} />
+        <span className={clsx("text-md", "ml-1", "font-semibold")}>Admin</span>
       </Link>
 
       <>

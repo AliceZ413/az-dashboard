@@ -16,17 +16,9 @@ const user = {
 
 const Layout = ({ children, home }) => {
   return (
-    <div
-      className={clsx(
-        styles.container,
-        "min-h-screen",
-        "space-y-6",
-        "flex",
-        "flex-col"
-      )}
-    >
+    <div className={clsx(styles.container, "min-h-screen", "flex", "flex-col")}>
       <Header user={user} />
-      <div className={clsx("grid", "grid-cols-[200px_1fr]", "gap-4")}>
+      <div className={clsx("grid", "grid-cols-[288px_1fr]", "flex-1")}>
         <Aside />
         <main
           className={clsx(
@@ -35,8 +27,6 @@ const Layout = ({ children, home }) => {
             "w-full",
             "flex-col",
             "overflow-y-auto",
-            "rounded-lg",
-            "shadow",
             "px-8",
             "pb-8"
           )}
