@@ -1,14 +1,27 @@
 import fs from "node:fs";
 import path from "node:path";
-import { Sequelize } from "sequelize";
-import devConfig from "@/config/index";
+import { DataTypes, Sequelize } from "sequelize";
+import { devConfig } from "@/config/index";
 
 const db = {};
 
 const sequelize = new Sequelize(devConfig);
 
-let list = fs.readdirSync(path.join(process.cwd(), '/src/models'));
-console.log(list);
+let list = fs.readdirSync(path.join(process.cwd(), "/src/models"));
+// console.log(list);
+const files = require.context(
+  path.join(process.cwd(), "/src/models"),
+  false,
+  /\.js$/i
+);
+files.keys().forEach((key) => {
+  if (key.includes("index")) {
+    return;
+  }
+  console.log(key);
+  const model = files(key)(sequelize, DataTypes);
+  db[model.name] = model;
+});
 
 db.list = list;
 

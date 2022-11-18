@@ -3,41 +3,14 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { DataTypes, Sequelize } from "sequelize";
 import { devConfig } from "@/config";
-import SequelizeAdapter, { models } from "@next-auth/sequelize-adapter";
-import db from "@/models";
+// import SequelizeAdapter, { models } from "@next-auth/sequelize-adapter";
+import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
 
-console.log(db);
-
-const sequelize = new Sequelize(devConfig);
-
-sequelize.sync();
-
-// import NextAuth from "next-auth"
-// import SequelizeAdapter, { models } from "@next-auth/sequelize-adapter"
-// import Sequelize, { DataTypes } from "sequelize"
-// const sequelize = new Sequelize("sqlite::memory:")
-// export default NextAuth({
-//   // https://next-auth.js.org/providers/overview
-//   providers: [],
-//   adapter: SequelizeAdapter(sequelize, {
-//     models: {
-//       User: sequelize.define("user", {
-//         ...models.User,
-//         phoneNumber: DataTypes.STRING,
-//       }),
-//     },
-//   }),
-// })
+const prisma = new PrismaClient();
 
 export default NextAuth({
-  adapter: SequelizeAdapter(sequelize, {
-    models: {
-      User: sequelize.define("user", {
-        ...models.User,
-        phoneNumber: DataTypes.STRING,
-      }),
-    },
-  }),
+  adapter: PrismaAdapter(prisma),
   pages: {
     signIn: "/login",
   },
