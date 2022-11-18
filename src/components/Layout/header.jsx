@@ -2,36 +2,40 @@ import clsx from "clsx";
 import LogoDevRounded from "@mui/icons-material/LogoDevRounded";
 import Link from "next/link";
 import Dropdown from "../dropdown/dropdown";
+import { Breadcrumbs } from "@mui/material";
+import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import styles from "./header.module.scss";
 
-const Header = ({ user }) => {
+const Header = ({ fixedNav }) => {
   return (
     <header
       className={clsx(
-        "h-[64px]",
+        "min-h-[4rem]",
+        "box-border",
+        "py-1",
+        "px-2",
+        "text-[#344767]",
         "flex",
         "justify-between",
         "items-center",
-        "px-8",
-        "bg-[#4e49dc]"
+        fixedNav
+          ? `sticky top-0 bg-white rounded-xl shadow-sm ${styles["header-bg"]}`
+          : ""
       )}
     >
-      <Link
-        href={"/"}
-        className={clsx(
-          "w-[150px]",
-          "h-[64px]",
-          "flex",
-          "items-center",
-          "text-white"
-        )}
-      >
-        <LogoDevRounded className={clsx("text-[36px]")} />
-        <span className={clsx("text-md", "ml-1", "font-semibold")}>Admin</span>
-      </Link>
-
-      <>
-        <Dropdown user={user}></Dropdown>
-      </>
+      <div>
+        <div>
+          <Breadcrumbs aria-label="breadcrumb">
+            <Link href="/">MUI</Link>
+            <Link href="/dashboard">MUI</Link>
+            <Link href="/dashboard/setting">MUI</Link>
+          </Breadcrumbs>
+        </div>
+        <div>title</div>
+      </div>
+      <div>
+        <SettingsRoundedIcon className={clsx("text-[24px]")} />
+      </div>
     </header>
   );
 };

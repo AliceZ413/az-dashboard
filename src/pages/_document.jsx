@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 export const siteTitle = "Next.js Sample Website";
 const Document = () => {
   return (
-    <Html>
+    <Html lang="en" className="bg-white text-slate-900 antialiased">
       <Head>
         <meta charSet="utf-8" />
         <meta
@@ -19,7 +19,7 @@ const Document = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <body>
+      <body className="min-h-screen">
         <Main />
         <NextScript />
       </body>

@@ -22,33 +22,10 @@ const Aside = () => {
   const path = usePathname();
 
   return (
-    <aside className={clsx("flex", "flex-col", "bg-white", "p-4", "shadow-md")}>
-      <nav className={clsx("grid", "items-start", "gap-2")}>
-        {navigationMenus.map((item, index) => {
-          return (
-            <Link key={index} href={item.href}>
-              <div
-                className={clsx(
-                  "group",
-                  "flex",
-                  "items-center",
-                  "rounded-md",
-                  "px-5",
-                  "py-3",
-                  "text-slate-600",
-                  "hover:bg-[#4e49dc]",
-                  "hover:text-white"
-                )}
-              >
-                <item.icon className={clsx("text-[24px]")} />
-                <span className={clsx("text-[16px]", "ml-2")}>
-                  {item.title}
-                </span>
-              </div>
-            </Link>
-          );
-        })}
-      </nav>
+    <aside className="flex">
+      <div className="w-[250px] flex-1 m-4 rounded-xl bg-gradient-to-bl from-[#42424a] to-[#191919]">
+        <nav className=""></nav>
+      </div>
     </aside>
   );
 };
