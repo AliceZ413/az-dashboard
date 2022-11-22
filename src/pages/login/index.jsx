@@ -22,7 +22,20 @@ const Login = () => {
       password: data.password,
       redirect: false,
     });
+    console.log(result);
     setLoading(false);
+  };
+
+  const registerUser = async () => {
+    const response = await fetch("/api/auth/signup", {
+      method: "POST",
+      body: JSON.stringify({ email: "admin@admin.com", password: "123456" }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await response.json();
   };
 
   return (
@@ -65,6 +78,32 @@ const Login = () => {
                     </p>
                   )}
                 </div>
+                <div className="grid gap-1">
+                  <label className="sr-only" htmlFor="password">
+                    Password
+                  </label>
+                  <input
+                    id="password"
+                    className={clsx(
+                      "border rounded-md py-2 px-3 text-sm focus:outline-none",
+                      errors?.password
+                        ? "border-red-600 placeholder:text-red-600 hover:border-red-600 focus:border-red-600"
+                        : "border-slate-300 placeholder:text-slate-400 hover:border-slate-400 focus:border-neutral-300"
+                    )}
+                    placeholder=""
+                    type="password"
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    name="password"
+                    disabled={isLoading}
+                    {...register("password", { required: "Password is required" })}
+                  />
+                  {errors?.password && (
+                    <p className="px-1 text-xs text-red-600">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
                 <button
                   type="submit"
                   disabled={isLoading}
@@ -72,8 +111,38 @@ const Login = () => {
                 >
                   Sign In with Email
                 </button>
+                <button
+                  type="button"
+                  onClick={registerUser}
+                  disabled={isLoading}
+                  className="inline-flex justify-center items-center cursor-pointer rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none"
+                >
+                  Sign Up
+                </button>
               </div>
             </form>
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-slate-300"></div>
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-white px-2 text-slate-600">
+                  Or continue with
+                </span>
+              </div>
+            </div>
+            <button
+              type="button"
+              className="inline-flex justify-center items-center cursor-pointer rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none"
+              onClick={() =>
+                signIn("github", {
+                  redirect: true,
+                })
+              }
+              disabled={isLoading}
+            >
+              Github
+            </button>
           </div>
           <p className="px-8 text-center text-sm text-slate-500">
             Don't have an account? Let's sign Up.

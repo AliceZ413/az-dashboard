@@ -16,15 +16,19 @@ import { PrismaClient } from "@prisma/client";
 // }
 let prisma = new PrismaClient();
 
-export default NextAuth({
+const options = {
   adapter: PrismaAdapter(prisma),
+  secret: process.env.SECRET,
+  session: {
+    strategy: "jwt",
+  },
   pages: {
     signIn: "/login",
   },
   providers: [
     GithubProvider({
-      clientId: "beb0c20fe72208b83a34",
-      clientSecret: "50c0ab0543a06ce7aff3caee7974afda86b18b99",
+      clientId: process.env.GITHUB_CLIENT_ID,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
     CredentialsProvider({
       name: "Credentials",
@@ -33,7 +37,7 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const user = await prisma.User.findFirst({
+        const user = await prisma.user.findFirst({
           where: {
             email: credentials.username,
           },
@@ -53,10 +57,15 @@ export default NextAuth({
   callbacks: {
     async session({ token, session }) {
       if (token) {
+        session.user.id = token.id;
+        session.user.name = token.name;
+        session.user.email = token.email;
+        session.user.image = token.picture;
       }
+
+      return session;
     },
     async jwt({ token, user }) {
-      console.log("jwt", token);
       const dbUser = await prisma.User.findFirst({
         where: {
           email: token.email,
@@ -68,8 +77,13 @@ export default NextAuth({
       }
       return {
         id: dbUser.id,
-
+        name: dbUser.name,
+        email: dbUser.email,
+        picture: dbUser.image,
       };
     },
   },
-});
+};
+const authHandler = (req, res) => NextAuth(req, res, options);
+
+export default authHandler;

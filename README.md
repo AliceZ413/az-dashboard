@@ -44,6 +44,12 @@ migrate（生产环境）
 npx prisma migrate deploy
 ```
 
+studio 当前项目数据库管理页面
+
+```bash
+npx prisma studio
+```
+
 
 
 ## Deploy on Vercel
@@ -51,3 +57,7 @@ npx prisma migrate deploy
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## 踩坑注意
+
+1.  middleware.js(.ts)，应该在项目根目录，路径{root}/middleware.js(.ts)，但如果项目使用了src文件夹，应该放入src的路径上，{root}/src/middleware.js(.ts)
