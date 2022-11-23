@@ -4,6 +4,7 @@ import styles from "./login.module.scss";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const Login = () => {
   const [isLoading, setLoading] = useState(false);
@@ -13,6 +14,10 @@ const Login = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({});
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  // console.log(searchParams.get("from"));
 
   const onSubmit = async (data) => {
     console.log(data);
@@ -21,8 +26,10 @@ const Login = () => {
       username: data.email,
       password: data.password,
       redirect: false,
+      callbackUrl: searchParams.get("from") || "/dashboard",
     });
-    console.log(result);
+    router.replace(searchParams.get("from") || "/dashboard");
+    // console.log(result);
     setLoading(false);
   };
 
@@ -96,7 +103,9 @@ const Login = () => {
                     autoCorrect="off"
                     name="password"
                     disabled={isLoading}
-                    {...register("password", { required: "Password is required" })}
+                    {...register("password", {
+                      required: "Password is required",
+                    })}
                   />
                   {errors?.password && (
                     <p className="px-1 text-xs text-red-600">
@@ -111,14 +120,14 @@ const Login = () => {
                 >
                   Sign In with Email
                 </button>
-                <button
+                {/* <button
                   type="button"
                   onClick={registerUser}
                   disabled={isLoading}
                   className="inline-flex justify-center items-center cursor-pointer rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none"
                 >
                   Sign Up
-                </button>
+                </button> */}
               </div>
             </form>
             <div className="relative">
