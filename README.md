@@ -50,7 +50,10 @@ studio 当前项目数据库管理页面
 npx prisma studio
 ```
 
-
+## 生成的随机NEXTAUTH_SECRET
+```bash
+openssl rand -base64 32
+```
 
 ## Deploy on Vercel
 

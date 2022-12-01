@@ -18,9 +18,14 @@ let prisma = new PrismaClient();
 
 const options = {
   adapter: PrismaAdapter(prisma),
-  secret: process.env.SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 10 * 60, // second
+  },
+  jwt: {
+    maxAge: 10 * 60, // second, defaults to session.maxAge
+    // encode() {},
+    // decode() {},
   },
   pages: {
     signIn: "/login",
