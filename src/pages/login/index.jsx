@@ -18,7 +18,7 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     setLoading(true);
     const result = await signIn("credentials", {
       username: data.email,
@@ -27,7 +27,7 @@ const Login = () => {
       callbackUrl: searchParams.get("from") || "/dashboard",
     });
     router.replace(searchParams.get("from") || "/dashboard");
-    // console.log(result);
+    console.log(result);
     setLoading(false);
   };
 
@@ -78,6 +78,7 @@ const Login = () => {
                         type="email"
                         name="email"
                         disabled={isLoading}
+                        defaultValue="admin@admin.com"
                         {...register("email", { required: "请填写邮箱" })}
                       />
                       {errors?.email && (
@@ -97,6 +98,7 @@ const Login = () => {
                         type="password"
                         name="password"
                         disabled={isLoading}
+                        defaultValue="123456"
                         {...register("password", { required: "请填写密码" })}
                       />
                       {errors?.password && (

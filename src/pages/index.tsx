@@ -24,6 +24,4 @@ const Dashboard = () => {
   );
 };
 
-Dashboard.Layout = "root";
-
 export default Dashboard;

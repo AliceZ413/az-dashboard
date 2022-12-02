@@ -22,12 +22,14 @@ export default withAuth(
       if (req.nextUrl.search) {
         from += req.nextUrl.search;
       }
-      return NextResponse.redirect(new URL(`/login?from=${encodeURIComponent(from)}`, req.url));
+      return NextResponse.redirect(
+        new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
+      );
     }
   },
   {
     callbacks: {
-      authorized() {
+      authorized({ req, token }) {
         return true;
       },
     },

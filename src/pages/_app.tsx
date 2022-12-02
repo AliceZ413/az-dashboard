@@ -1,7 +1,15 @@
+import type { AppProps } from "next/app";
+
 import "../styles/globals.css";
 import Layout from "@/components/Layout/layout";
 import { SessionProvider } from "next-auth/react";
 import localFont from "@next/font/local";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
+
+interface MyAppProps {
+  Layout?: string;
+}
 
 const Roboto = localFont({
   src: [
@@ -68,7 +76,7 @@ const Roboto = localFont({
   ],
 });
 
-function AppMain({ children }) {
+function AppMain({ pageProps, children }) {
   return (
     <>
       <main className={Roboto.className}>{children}</main>
@@ -76,24 +84,24 @@ function AppMain({ children }) {
   );
 }
 
-function MyApp({ Component, pageProps }) {
-  if (Component.Layout === "root") {
-    return (
-      <SessionProvider session={pageProps.session}>
-        <AppMain>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </AppMain>
-      </SessionProvider>
-    );
-  }
+function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+  const isDashboard = router.pathname.startsWith("/dashboard");
+
   return (
-    <SessionProvider session={pageProps.session}>
-      <AppMain>
-        <Component {...pageProps} />
-      </AppMain>
-    </SessionProvider>
+    <>
+      <SessionProvider session={pageProps.session}>
+        <main className={Roboto.className}>
+          {isDashboard ? (
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          ) : (
+            <Component {...pageProps} />
+          )}
+        </main>
+      </SessionProvider>
+    </>
   );
 }
 
