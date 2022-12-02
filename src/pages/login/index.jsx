@@ -76,9 +76,6 @@ const Login = () => {
                         isError={errors?.email}
                         placeholder="name@example.com"
                         type="email"
-                        autoCapitalize="none"
-                        autoComplete="email"
-                        autoCorrect="off"
                         name="email"
                         disabled={isLoading}
                         {...register("email", { required: "请填写邮箱" })}

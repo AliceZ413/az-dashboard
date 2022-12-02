@@ -1,9 +1,11 @@
 import clsx from "clsx";
+import { useRef, forwardRef } from "react";
 
-const Input = ({ isError = false, className, ...props }) => {
+const Input = forwardRef(({ isError = false, className, ...props }, ref) => {
   return (
     <>
       <input
+        ref={ref}
         className={clsx(
           "border rounded-md py-2 px-3 text-sm focus:outline-none",
           isError
@@ -15,6 +17,6 @@ const Input = ({ isError = false, className, ...props }) => {
       />
     </>
   );
-};
+});
 
 export default Input;
