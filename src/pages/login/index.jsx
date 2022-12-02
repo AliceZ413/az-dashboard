@@ -90,23 +90,14 @@ const Login = () => {
                       <label className="sr-only" htmlFor="password">
                         Password
                       </label>
-                      <input
+                      <Input
                         id="password"
-                        className={clsx(
-                          "border rounded-md py-2 px-3 text-sm focus:outline-none",
-                          errors?.password
-                            ? "border-red-600 placeholder:text-red-600 hover:border-red-600 focus:border-red-600"
-                            : "border-slate-300 placeholder:text-slate-400 hover:border-slate-400 focus:border-neutral-300"
-                        )}
+                        isError={errors?.password}
                         placeholder="password"
                         type="password"
-                        autoCapitalize="none"
-                        autoCorrect="off"
                         name="password"
                         disabled={isLoading}
-                        {...register("password", {
-                          required: "请填写密码",
-                        })}
+                        {...register("password", { required: "请填写密码" })}
                       />
                       {errors?.password && (
                         <p className="px-1 text-xs text-red-600">
@@ -119,7 +110,7 @@ const Login = () => {
                       disabled={isLoading}
                       className="inline-flex justify-center items-center cursor-pointer rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none"
                     >
-                      Sign In with Email
+                      登录
                     </button>
                   </div>
                 </form>
