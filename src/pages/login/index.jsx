@@ -18,17 +18,18 @@ const Login = () => {
   const router = useRouter();
 
   const onSubmit = async (data) => {
-    // console.log(data);
-    setLoading(true);
-    const result = await signIn("credentials", {
+    console.log(data);
+    // setLoading(true);
+    const result = signIn("credentials", {
       username: data.email,
       password: data.password,
       redirect: false,
       callbackUrl: searchParams.get("from") || "/dashboard",
     });
-    router.replace(searchParams.get("from") || "/dashboard");
-    console.log(result);
-    setLoading(false);
+    // // router.replace(searchParams.get("from") || "/dashboard");
+    // console.log(result);
+    // setLoading(false);
+    // return false;
   };
 
   const registerUser = async () => {
@@ -55,7 +56,7 @@ const Login = () => {
               <div>Next Admin</div>
             </div>
             <div className="text-xl font-semibold my-auto">
-              <div>一个开箱即用的中后台管理系统</div>
+              一个开箱即用的中后台管理系统
             </div>
           </div>
           <div className="flex flex-col w-6/12 h-full">

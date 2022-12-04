@@ -3,7 +3,7 @@ import GithubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { NextApiHandler } from "next";
-import prisma from '@/libs/prisma';
+import prisma from "@/libs/prisma";
 
 const options: NextAuthOptions = {
   debug: true,
@@ -26,7 +26,7 @@ const options: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      id: 'Credentials',
+      id: "Credentials",
       name: "Credentials",
       credentials: {
         username: { label: "Username", type: "text" },
@@ -39,7 +39,7 @@ const options: NextAuthOptions = {
           },
         });
 
-        console.log('authorize', user);
+        console.log("authorize", user);
 
         if (user) {
           return user;
@@ -78,10 +78,18 @@ const options: NextAuthOptions = {
       }
       return session;
     },
-
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return baseUrl + url;
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url;
+      return baseUrl;
+    },
   },
 };
 
-const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
+// const authHandler: NextApiHandler = (req, res) => NextAuth(req, res, options);
 
-export default authHandler;
+// export default authHandler;
+
+export default NextAuth(options);
