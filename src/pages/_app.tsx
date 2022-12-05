@@ -4,8 +4,8 @@ import "../styles/globals.css";
 import Layout from "@/components/Layout/layout";
 import { SessionProvider } from "next-auth/react";
 import localFont from "@next/font/local";
-import { NextPage } from "next";
 import { useRouter } from "next/router";
+import { ConfigProvider, theme } from "antd";
 
 interface MyAppProps {
   Layout?: string;
@@ -91,15 +91,28 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <SessionProvider session={pageProps.session}>
-        <main className={Roboto.className}>
-          {isDashboard ? (
-            <Layout>
+        <ConfigProvider
+          theme={{
+            components: {
+              Button: {
+                // colorPrimary: "rgb(36, 41, 47)",
+                // colorPrimaryActive: "rgba(36, 41, 47, .9)",
+                // colorPrimaryBorder: "transparent",
+                // colorPrimaryHover: "rgb(36, 41, 47)",
+              },
+            },
+          }}
+        >
+          <main className={Roboto.className}>
+            {isDashboard ? (
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            ) : (
               <Component {...pageProps} />
-            </Layout>
-          ) : (
-            <Component {...pageProps} />
-          )}
-        </main>
+            )}
+          </main>
+        </ConfigProvider>
       </SessionProvider>
     </>
   );

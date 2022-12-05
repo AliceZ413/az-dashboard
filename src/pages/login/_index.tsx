@@ -1,13 +1,14 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
 import { useRouter, useSearchParams } from "next/navigation";
 import { IconDrone } from "@tabler/icons";
+import { Input, Form } from "antd";
 
-import Input from "@/components/Input/input";
+// import Input from "@/components/Input/input";
 
-const Login = () => {
+const Login: React.FC = () => {
   const [isLoading, setLoading] = useState(false);
   const {
     register,
@@ -66,19 +67,17 @@ const Login = () => {
           </div>
           <div className="flex flex-col w-6/12 h-full">
             <div className="w-full px-5 py-8 mx-auto my-auto lg:w-auto">
-              <div className="flex flex-col mb-2">
-                <h1 className="text-2xl font-bold">欢迎回来</h1>
-                <p className="text-sm text-slate-500">在此处登录你的账号</p>
-              </div>
+              <h1 className="text-2xl font-bold">欢迎回来</h1>
+              <p className="text-sm text-slate-500">在此处登录你的账号</p>
               <div className="grid gap-6">
                 <form onSubmit={onSubmit}>
-                  {/* handleSubmit(onSubmit) */}
                   <div className="grid gap-2">
                     <div className="grid gap-2">
                       <label className="sr-only" htmlFor="email">
                         Email
                       </label>
-                      <Input
+                      <Input />
+                      {/* <Input
                         id="email"
                         isError={errors?.email}
                         placeholder="name@example.com"
@@ -92,13 +91,13 @@ const Login = () => {
                         <p className="px-1 text-xs text-red-600">
                           {errors.email.message}
                         </p>
-                      )}
+                      )} */}
                     </div>
                     <div className="grid gap-2">
                       <label className="sr-only" htmlFor="password">
                         Password
                       </label>
-                      <Input
+                      {/* <Input
                         id="password"
                         isError={errors?.password}
                         placeholder="password"
@@ -112,7 +111,7 @@ const Login = () => {
                         <p className="px-1 text-xs text-red-600">
                           {errors.password.message}
                         </p>
-                      )}
+                      )} */}
                     </div>
                     <button
                       type="submit"
@@ -129,11 +128,11 @@ const Login = () => {
                   </div>
                   <div className="relative flex justify-center text-xs uppercase">
                     <span className="bg-white px-2 text-slate-600">
-                      Or continue with
+                      其他登录方式
                     </span>
                   </div>
                 </div>
-                <button
+                {/* <button
                   type="button"
                   className="inline-flex justify-center items-center cursor-pointer rounded-lg bg-[#24292F] px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-[#24292F]/90 focus:outline-none"
                   onClick={() =>
@@ -144,11 +143,8 @@ const Login = () => {
                   disabled={isLoading}
                 >
                   Github
-                </button>
+                </button> */}
               </div>
-              <p className="px-8 text-center text-sm text-slate-500">
-                Don't have an account? Let's sign Up.
-              </p>
             </div>
           </div>
         </div>
