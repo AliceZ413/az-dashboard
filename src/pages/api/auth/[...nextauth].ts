@@ -26,8 +26,7 @@ const options: NextAuthOptions = {
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      id: "Credentials",
-      name: "Credentials",
+      type: 'credentials',
       credentials: {
         username: { label: "Username", type: "text" },
         password: { label: "Password", type: "password" },
@@ -52,6 +51,8 @@ const options: NextAuthOptions = {
   callbacks: {
     /** 登录成功后jwt回调，user中取得数据，在调用signIn才会有值，之后是在cookie中读取 */
     async jwt({ token, user, account, profile, isNewUser }) {
+      console.log('jwt');
+      
       const dbUser = await prisma.user.findFirst({
         where: {
           email: token.email,
@@ -70,6 +71,8 @@ const options: NextAuthOptions = {
     },
     /** 调用getSession，useSession触发，此处将token存入user中 */
     async session({ session, token, user }) {
+      console.log('session');
+      
       if (token) {
         session.user.id = token.id;
         session.user.name = token.name;

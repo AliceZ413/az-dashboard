@@ -17,19 +17,24 @@ const Login = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
 
-  const onSubmit = async (data) => {
-    console.log(data);
-    // setLoading(true);
-    const result = signIn("credentials", {
-      username: data.email,
-      password: data.password,
-      redirect: false,
-      callbackUrl: searchParams.get("from") || "/dashboard",
-    });
-    // // router.replace(searchParams.get("from") || "/dashboard");
-    // console.log(result);
-    // setLoading(false);
-    // return false;
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    handleSubmit(async (data) => {
+      setLoading(true);
+      const result = await signIn("credentials", {
+        username: data?.email,
+        password: data?.password,
+        redirect: false,
+        callbackUrl: searchParams.get("from") || "/dashboard",
+      });
+      if (result?.ok) {
+        router.replace(searchParams.get("from") || "/dashboard");
+      } else {
+        console.log("somthing error when signIn");
+      }
+      setLoading(false);
+    })(e);
   };
 
   const registerUser = async () => {
@@ -66,7 +71,8 @@ const Login = () => {
                 <p className="text-sm text-slate-500">在此处登录你的账号</p>
               </div>
               <div className="grid gap-6">
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={onSubmit}>
+                  {/* handleSubmit(onSubmit) */}
                   <div className="grid gap-2">
                     <div className="grid gap-2">
                       <label className="sr-only" htmlFor="email">

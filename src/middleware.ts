@@ -4,28 +4,28 @@ import { NextResponse } from "next/server";
 
 export default withAuth(
   async function middleware(req) {
-    // const token = await getToken({ req });
-    // const isAuth = !!token;
-    // const isAuthPage =
-    //   req.nextUrl.pathname.startsWith("/login") ||
-    //   req.nextUrl.pathname.startsWith("/register");
+    const token = await getToken({ req });
+    const isAuth = !!token;
+    const isAuthPage =
+      req.nextUrl.pathname.startsWith("/login") ||
+      req.nextUrl.pathname.startsWith("/register");
 
-    // if (isAuthPage) {
-    //   if (isAuth) {
-    //     return NextResponse.redirect(new URL("/dashboard", req.url));
-    //   }
-    //   return null;
-    // }
+    if (isAuthPage) {
+      if (isAuth) {
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+      }
+      return null;
+    }
 
-    // if (!isAuth) {
-    //   let from = req.nextUrl.pathname;
-    //   if (req.nextUrl.search) {
-    //     from += req.nextUrl.search;
-    //   }
-    //   return NextResponse.redirect(
-    //     new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
-    //   );
-    // }
+    if (!isAuth) {
+      let from = req.nextUrl.pathname;
+      if (req.nextUrl.search) {
+        from += req.nextUrl.search;
+      }
+      return NextResponse.redirect(
+        new URL(`/login?from=${encodeURIComponent(from)}`, req.url)
+      );
+    }
   },
   {
     callbacks: {
@@ -37,5 +37,5 @@ export default withAuth(
 );
 
 export const config = {
-  matcher: ["/dashboard/:path*", "/editor/:path*",],
+  matcher: ["/dashboard/:path*", "/editor/:path*", "/login", "/register"],
 };
