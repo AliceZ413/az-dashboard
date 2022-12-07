@@ -7,15 +7,6 @@ import Header from "./header";
 import Aside from "./asider";
 import { useEffect, useRef, useState } from "react";
 
-const name = "Your Name";
-export const siteTitle = "Next.js Sample Website";
-
-const user = {
-  name: "AliceZ413",
-  avatar: "",
-  email: "491736271@qq.com",
-};
-
 const Layout = ({ children }) => {
   const [fixedNav, setFixedNav] = useState(false);
   const mainRef = useRef(null);
