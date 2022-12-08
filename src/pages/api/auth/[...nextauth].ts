@@ -1,24 +1,24 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { NextApiHandler } from "next";
-import prisma from "@/libs/prisma";
+import NextAuth, { NextAuthOptions } from 'next-auth';
+import GithubProvider from 'next-auth/providers/github';
+import CredentialsProvider from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { NextApiHandler } from 'next';
+import prisma from '@/libs/prisma';
 
 const options: NextAuthOptions = {
   debug: true,
   adapter: PrismaAdapter(prisma),
   session: {
-    strategy: "jwt",
-    maxAge: 10 * 60, // second
+    strategy: 'jwt',
+    maxAge: 60 * 60, // second
   },
   jwt: {
-    maxAge: 10 * 60, // second, defaults to session.maxAge
+    maxAge: 60 * 60, // second, defaults to session.maxAge
     // encode() {},
     // decode() {},
   },
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
   providers: [
     GithubProvider({
@@ -28,8 +28,8 @@ const options: NextAuthOptions = {
     CredentialsProvider({
       type: 'credentials',
       credentials: {
-        username: { label: "Username", type: "text" },
-        password: { label: "Password", type: "password" },
+        username: { label: 'Username', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
       authorize: async (credentials, req) => {
         const user = await prisma.user.findFirst({
@@ -38,7 +38,7 @@ const options: NextAuthOptions = {
           },
         });
 
-        console.log("authorize", user);
+        console.log('authorize', user);
 
         if (user) {
           return user;
@@ -83,7 +83,7 @@ const options: NextAuthOptions = {
     },
     async redirect({ url, baseUrl }) {
       // Allows relative callback URLs
-      if (url.startsWith("/")) return baseUrl + url;
+      if (url.startsWith('/')) return baseUrl + url;
       // Allows callback URLs on the same origin
       else if (new URL(url).origin === baseUrl) return url;
       return baseUrl;

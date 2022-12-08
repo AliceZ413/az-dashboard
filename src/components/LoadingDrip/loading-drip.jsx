@@ -1,4 +1,4 @@
-import styles from "./loading-drip.module.scss";
+import styles from './loading-drip.module.scss';
 const LoadingDrip = () => {
   return (
     <>

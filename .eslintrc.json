@@ -1,6 +1,24 @@
+/** @Type import('') */
 {
   "extends": "next/core-web-vitals",
   "rules": {
-    "@next/next/no-head-element": "offf"
+    "@next/next/no-head-element": "off",
+    // 控制逗号前后的空格
+    "comma-spacing": [
+      2,
+      {
+        "before": false,
+        "after": true
+      }
+    ],
+    "semi": [
+      2,
+      "always"
+    ], //语句强制分号结尾
+    "quotes": [
+      2,
+      "single"
+    ],
+    "jsx-quotes": ["error", "prefer-single"]
   }
 }

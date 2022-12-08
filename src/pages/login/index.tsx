@@ -1,27 +1,27 @@
-import { IconDrone } from "@tabler/icons";
-import React, { useState } from "react";
-import { Input, Form, Button } from "antd";
-import clsx from "clsx";
-import { signIn } from "next-auth/react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { IconDrone } from '@tabler/icons';
+import React, { useState } from 'react';
+import { Input, Form, Button } from 'antd';
+import clsx from 'clsx';
+import { signIn } from 'next-auth/react';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 const LoginPage: React.FC = () => {
-  const [isLoading, setLoading] = useState(false);
+  const [ isLoading, setLoading ] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const onFinish = async (data: { email: string; password: string }) => {
     setLoading(true);
-    const result = await signIn("credentials", {
+    const result = await signIn('credentials', {
       username: data?.email,
       password: data?.password,
       redirect: false,
-      callbackUrl: searchParams.get("from") || "/dashboard",
+      callbackUrl: searchParams.get('from') || '/dashboard',
     });
     if (result?.ok) {
-      router.replace(searchParams.get("from") || "/dashboard");
+      router.replace(searchParams.get('from') || '/dashboard');
     } else {
-      console.log("somthing error when signIn");
+      console.log('somthing error when signIn');
     }
     setLoading(false);
   };
@@ -48,11 +48,11 @@ const LoginPage: React.FC = () => {
                 <Form onFinish={onFinish}>
                   <Form.Item
                     name="email"
-                    rules={[{ required: true, message: "请填写邮箱" }]}
+                    rules={[ { required: true, message: '请填写邮箱' } ]}
                   >
                     <Input
                       className={clsx(
-                        "min-w-[160px] xl:min-w-[320px] lg:min-w-[260px] md:min-w-[240px]"
+                        'min-w-[160px] xl:min-w-[320px] lg:min-w-[260px] md:min-w-[240px]'
                       )}
                       placeholder="邮箱"
                       size="large"
@@ -60,13 +60,13 @@ const LoginPage: React.FC = () => {
                   </Form.Item>
                   <Form.Item
                     name="password"
-                    rules={[{ required: true, message: "请填写密码" }]}
+                    rules={[ { required: true, message: '请填写密码' } ]}
                   >
                     <Input
-                      type={"password"}
+                      type={'password'}
                       className={clsx(
-                        "",
-                        "min-w-[160px] xl:min-w-[320px] lg:min-w-[260px] md:min-w-[240px]"
+                        '',
+                        'min-w-[160px] xl:min-w-[320px] lg:min-w-[260px] md:min-w-[240px]'
                       )}
                       placeholder="密码"
                       size="large"

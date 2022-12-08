@@ -1,11 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== "POST") {
+  if (req.method !== 'POST') {
     res.status(400);
     return;
   }
@@ -13,13 +13,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (
     !email ||
-    !email.includes("@") ||
+    !email.includes('@') ||
     !password ||
     password.trim().length < 6
   ) {
     res.status(422).json({
       message:
-        "Invalid input - password should also be at least 7 characters long.",
+        'Invalid input - password should also be at least 7 characters long.',
     });
     return;
   }
@@ -27,11 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   // encrypted
   const result = await prisma.user.create({
     data: {
-      name: "Default",
+      name: 'Default',
       email: email,
       password: password,
     },
   });
 
-  res.status(201).json({ message: "Created user success!" });
+  res.status(201).json({ message: 'Created user success!' });
 }

@@ -1,19 +1,19 @@
-import clsx from "clsx";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
-import TuneRoundedIcon from "@mui/icons-material/TuneRounded";
-import styles from "./asider.module.scss";
+import clsx from 'clsx';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
+import TuneRoundedIcon from '@mui/icons-material/TuneRounded';
+import styles from './asider.module.scss';
 
 export const navigationMenus = [
   {
-    title: "面板",
-    href: "/",
+    title: '面板',
+    href: '/',
     icon: DashboardRoundedIcon,
   },
   {
-    title: "设置",
-    href: "/dashboard/setting",
+    title: '设置',
+    href: '/dashboard/setting',
     icon: TuneRoundedIcon,
   },
 ];

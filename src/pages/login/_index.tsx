@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import { signIn } from "next-auth/react";
-import { useForm } from "react-hook-form";
-import clsx from "clsx";
-import { useRouter, useSearchParams } from "next/navigation";
-import { IconDrone } from "@tabler/icons";
-import { Input, Form } from "antd";
+import React, { useState } from 'react';
+import { signIn } from 'next-auth/react';
+import { useForm } from 'react-hook-form';
+import clsx from 'clsx';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { IconDrone } from '@tabler/icons';
+import { Input, Form } from 'antd';
 
 // import Input from "@/components/Input/input";
 
 const Login: React.FC = () => {
-  const [isLoading, setLoading] = useState(false);
+  const [ isLoading, setLoading ] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,27 +23,27 @@ const Login: React.FC = () => {
 
     handleSubmit(async (data) => {
       setLoading(true);
-      const result = await signIn("credentials", {
+      const result = await signIn('credentials', {
         username: data?.email,
         password: data?.password,
         redirect: false,
-        callbackUrl: searchParams.get("from") || "/dashboard",
+        callbackUrl: searchParams.get('from') || '/dashboard',
       });
       if (result?.ok) {
-        router.replace(searchParams.get("from") || "/dashboard");
+        router.replace(searchParams.get('from') || '/dashboard');
       } else {
-        console.log("somthing error when signIn");
+        console.log('somthing error when signIn');
       }
       setLoading(false);
     })(e);
   };
 
   const registerUser = async () => {
-    const response = await fetch("/api/auth/signup", {
-      method: "POST",
-      body: JSON.stringify({ email: "admin@admin.com", password: "123456" }),
+    const response = await fetch('/api/auth/signup', {
+      method: 'POST',
+      body: JSON.stringify({ email: 'admin@admin.com', password: '123456' }),
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 

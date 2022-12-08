@@ -1,5 +1,5 @@
-import { Html, Head, Main, NextScript } from "next/document";
-export const siteTitle = "Next.js Sample Website";
+import { Html, Head, Main, NextScript } from 'next/document';
+export const siteTitle = 'Next.js Sample Website';
 const Document = () => {
   return (
     <Html lang="en" className="bg-white text-slate-900 antialiased">

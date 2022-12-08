@@ -1,5 +1,5 @@
-import clsx from "clsx";
-import Link from "next/link";
+import clsx from 'clsx';
+import Link from 'next/link';
 import {
   Avatar,
   Breadcrumbs,
@@ -8,15 +8,15 @@ import {
   MenuItem,
   MenuList,
   Tooltip,
-} from "@mui/material";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
-import { signOut, useSession } from "next-auth/react";
-import styles from "./header.module.scss";
-import { useState } from "react";
+} from '@mui/material';
+import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
+import { signOut, useSession } from 'next-auth/react';
+import styles from './header.module.scss';
+import { useState } from 'react';
 
 const Header = ({ fixedNav }) => {
   const { data, status } = useSession();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [ anchorEl, setAnchorEl ] = useState(null);
   const open = Boolean(anchorEl);
 
   const openUserMenu = (event) => {
@@ -34,17 +34,17 @@ const Header = ({ fixedNav }) => {
   return (
     <header
       className={clsx(
-        "min-h-[4rem]",
-        "box-border",
-        "py-1",
-        "px-2",
-        "text-[#344767]",
-        "flex",
-        "justify-between",
-        "items-center",
+        'min-h-[4rem]',
+        'box-border',
+        'py-1',
+        'px-2',
+        'text-[#344767]',
+        'flex',
+        'justify-between',
+        'items-center',
         fixedNav
-          ? `sticky top-0 bg-white rounded-xl shadow-sm ${styles["header-bg"]}`
-          : ""
+          ? `sticky top-0 bg-white rounded-xl shadow-sm ${styles['header-bg']}`
+          : ''
       )}
     >
       <div>

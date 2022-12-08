@@ -1,7 +1,7 @@
-import LoadingDrip from "@/components/LoadingDrip/loading-drip";
-import Head from "next/head";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import LoadingDrip from '@/components/LoadingDrip/loading-drip';
+import Head from 'next/head';
+import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 
 const Dashboard = () => {
   // if 判断是否登录
@@ -10,7 +10,7 @@ const Dashboard = () => {
   const router = useRouter();
   useEffect(() => {
     setTimeout(() => {
-      router.push("/dashboard");
+      router.push('/dashboard');
     }, 300);
     return () => {};
   }, []);
