@@ -8,7 +8,7 @@ const NotFoundPage = () => {
         <title>Admin | 404</title>
       </Head>
       <div className={styles['page-404']}>
-        <div className={styles['text-magic']} data-word="404 Not Found">
+        <div className={styles['text-magic']} data-word='404 Not Found'>
           {'404 Not Found'}
           <div className={styles['white']}></div>
         </div>

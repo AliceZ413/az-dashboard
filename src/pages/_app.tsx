@@ -2,15 +2,12 @@ import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import localFont from '@next/font/local';
 import { useRouter } from 'next/router';
-import { ConfigProvider, theme } from 'antd';
+// import { ConfigProvider, theme } from 'antd';
+import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 
 import '../styles/globals.css';
 import Layout from '@/components/Layout/layout';
 import BaseLayout from '@/components/Layout/BaseLayout/BaseLayout';
-
-interface MyAppProps {
-  Layout?: string;
-}
 
 const Roboto = localFont({
   src: [
@@ -77,6 +74,16 @@ const Roboto = localFont({
   ],
 });
 
+const colors = {
+  brand: {
+    900: '#1a365d',
+    800: '#153e75',
+    700: '#2a69ac',
+  },
+};
+
+const theme = extendTheme({ colors });
+
 function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
   const isDashboard = router.pathname.startsWith('/dashboard');
@@ -84,9 +91,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <SessionProvider session={pageProps.session}>
-        <ConfigProvider theme={{
-          algorithm: theme.defaultAlgorithm
-        }}>
+        <ChakraProvider theme={theme}>
           <main className={Roboto.className}>
             {isDashboard ? (
               <BaseLayout>
@@ -96,7 +101,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Component {...pageProps} />
             )}
           </main>
-        </ConfigProvider>
+        </ChakraProvider>
       </SessionProvider>
     </>
   );

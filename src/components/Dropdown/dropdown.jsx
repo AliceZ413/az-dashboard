@@ -47,7 +47,7 @@ const Dropdown = ({ user }) => {
             'bg-white',
             'shadow-md'
           )}
-          align="end"
+          align='end'
         >
           <div className={clsx('py-2', 'px-3')}>
             {user.name && (

@@ -13,7 +13,7 @@ const Dashboard = () => {
       router.push('/dashboard');
     }, 300);
     return () => {};
-  }, []);
+  }, [router]);
   return (
     <>
       <Head>

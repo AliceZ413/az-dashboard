@@ -22,9 +22,9 @@ const Aside = () => {
   const path = usePathname();
 
   return (
-    <aside className="flex">
-      <div className="w-[250px] flex-1 m-4 rounded-xl bg-gradient-to-bl from-[#42424a] to-[#191919]">
-        <nav className=""></nav>
+    <aside className='flex'>
+      <div className='w-[250px] flex-1 m-4 rounded-xl bg-gradient-to-bl from-[#42424a] to-[#191919]'>
+        <nav className=''></nav>
       </div>
     </aside>
   );

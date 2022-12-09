@@ -49,10 +49,10 @@ const Header = ({ fixedNav }) => {
     >
       <div>
         <div>
-          <Breadcrumbs aria-label="breadcrumb">
-            <Link href="/">MUI</Link>
-            <Link href="/dashboard">MUI</Link>
-            <Link href="/dashboard/setting">MUI</Link>
+          <Breadcrumbs aria-label='breadcrumb'>
+            <Link href='/'>MUI</Link>
+            <Link href='/dashboard'>MUI</Link>
+            <Link href='/dashboard/setting'>MUI</Link>
           </Breadcrumbs>
         </div>
         <div>title</div>
@@ -66,7 +66,7 @@ const Header = ({ fixedNav }) => {
         </Tooltip>
         <Menu anchorEl={anchorEl} open={open} onClose={closeUserMenu}>
           <MenuItem>
-            <div className="w-[50px] text-center text-[16px]" onClick={logoutUser}>退出</div>
+            <div className='w-[50px] text-center text-[16px]' onClick={logoutUser}>退出</div>
           </MenuItem>
         </Menu>
       </div>

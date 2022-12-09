@@ -26,18 +26,18 @@ const Layout = ({ children }) => {
   return (
     <>
       <Head>
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       </Head>
-      <div className="bg-[#f0f2f5] h-screen flex">
+      <div className='bg-[#f0f2f5] h-screen flex'>
         <Aside />
         <div
           ref={mainRef}
-          className="h-screen flex-1 p-6 overflow-y-auto relative"
+          className='h-screen flex-1 p-6 overflow-y-auto relative'
         >
           <Header fixedNav={fixedNav} />
           <main>
             {children}
-            <Toaster position="top-right" />
+            <Toaster position='top-right' />
           </main>
         </div>
       </div>
